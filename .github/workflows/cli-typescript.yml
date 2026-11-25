@@ -70,6 +70,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24.20.0'
+          cache: npm
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
       - name: 검사 증거 경로 등록
         shell: bash
         run: |
